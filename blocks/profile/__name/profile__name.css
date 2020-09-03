@@ -2,15 +2,16 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 1.33;
-  margin: 0 auto;
-  display: inline-block;
-/*   display: flex;
-  flex-direction: row; */
-  max-width: 400px;
+  margin: 0;
+  max-width: 336px;
   overflow:hidden;
   white-space:nowrap;
   text-overflow: ellipsis;
   transform: translateY(20%);
+/*   align-self: end; */
+ /*  display: inline-block; */
+/*   display: flex;
+  flex-direction: row; */
 }
 
 
