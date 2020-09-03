@@ -1,0 +1,19 @@
+.popup__input-item {
+  margin: 20px auto 0;
+  min-height: 40px;
+  width: 358px;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 513px) {
+  .popup__input-item {
+    width: 70%;
+  }
+}
