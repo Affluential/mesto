@@ -4,6 +4,8 @@
   line-height: 1.33;
   margin: 0 auto;
   display: inline-block;
+/*   display: flex;
+  flex-direction: row; */
   max-width: 400px;
   overflow:hidden;
   white-space:nowrap;
@@ -14,15 +16,9 @@
 
 @media screen and (max-width: 929px) {
   .profile__name {
-  font-weight: 500;
   font-size: 27px;
   line-height: 56px;
   transform: translateY(33%);
-  }
-}
-
-@media screen and (max-width: 929px) {
-  .profile__name {
-    max-width: 280px;
+  max-width: 280px;
   }
 }

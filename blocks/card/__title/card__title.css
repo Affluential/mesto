@@ -6,6 +6,5 @@
   max-width: 200px;
   overflow:hidden;
   white-space:nowrap;
-  display: inline;
   text-overflow: ellipsis;
 }
