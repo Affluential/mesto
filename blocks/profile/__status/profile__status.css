@@ -8,7 +8,6 @@
   white-space:nowrap;
   text-overflow: ellipsis;
   align-self: flex-end;
-   /*  margin: 16px 0 25px 0; */
 }
 
 @media screen and (max-width: 929px) {
