@@ -27,48 +27,7 @@
       </section>
       <section class="wrapper-cards">
         <ul class="cards">
-          <li class="card">
-            <div class="card__image" style="background-image: url(./images/arbat.jpg);"></div>
-            <div class="card__column">
-              <h2 class="card__title">Арбат</h2>
-              <button type="button" class="card__like" aria-label="Понравилось"></button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image" style="background-image: url(./images/boldinoBig.jpg);"></div>
-            <div class="card__column">
-              <h2 class="card__title">Болдино</h2>
-              <button type="button" class="card__like" aria-label="Понравилось"></button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image" style="background-image: url(./images/mikhailovskoeBig.jpg);"></div>
-            <div class="card__column">
-              <h2 class="card__title">Михайловское село</h2>
-              <button type="button" class="card__like" aria-label="Понравилось"></button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image" style="background-image: url(./images/moykabig.jpg);"></div>
-            <div class="card__column">
-              <h2 class="card__title">Дом на Мойке</h2>
-              <button type="button" class="card__like" aria-label="Понравилось"></button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image" style="background-image: url(./images/tsarckoeseloBig.jpg);"></div>
-            <div class="card__column">
-              <h2 class="card__title">Царское село</h2>
-              <button type="button" class="card__like" aria-label="Понравилось"></button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image" style="background-image: url(./images/vyazemBig.jpg);"></div>
-            <div class="card__column">
-              <h2 class="card__title">Вязьма</h2>
-              <button type="button" class="card__like" aria-label="Понравилось"></button>
-            </div>
-          </li>
+
         </ul>
       </section>
     </main>
@@ -76,7 +35,7 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup">
+  <div class="popup js__popup-input">
     <form class="popup__container" action="#" name="popupForm">
       <h2 class="popup__title">Редактировать профиль</h2>
       <fieldset class="popup__input">
@@ -87,6 +46,19 @@
       </fieldset>
       <button type="submit" class="popup__save-button" value="Сохранить">Сохранить</button>
       <button type="reset" class="popup__close-button" aria-label="Закрыть"></button>
+    </form>
+  </div>
+  <div class="popup js__popup-add">
+    <form class="popup__container js__popup__container" action="#" name="popupForm">
+      <h2 class="popup__title">Новое место</h2>
+      <fieldset class="popup__input">
+        <input type="text" name="nameChange" required placeholder="Название"
+          class="popup__input-item popup__input-item_change_value">
+        <input type="text" name="statusChange" required placeholder="Ссылка на картинку"
+          class="popup__input-item popup__input-item_change_image">
+      </fieldset>
+      <button type="submit" class="popup__save-button js__add_submit" value="Сохранить">Сохранить</button>
+      <button type="reset" class="popup__close-button js__add_close" aria-label="Закрыть"></button>
     </form>
   </div>
   <script src="./scripts/index.js" defer></script>
