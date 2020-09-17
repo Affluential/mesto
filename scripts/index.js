@@ -46,7 +46,6 @@ const ulCards = document.querySelector(".cards");
 const addInputValue = document.querySelector(".popup__input-item_change_value");
 const addInputImage = document.querySelector(".popup__input-item_change_image");
 const addSaveForm = document.querySelector(".js__popup__container");
-/* const likeButton = document.querySelectorAll(".card__like"); */
 
 const openPopup = () => {
   popup.classList.toggle("popup_is-opened");
@@ -82,10 +81,22 @@ function addCard(cardObject, index) {
     ".card__image"
   ).style.backgroundImage = `url(${cardObject.link})`;
   htmlElement.querySelector(".card__title").innerText = cardObject.name;
-  ulCards.appendChild(htmlElement);
+  ulCards.prepend(htmlElement);
 }
 
 const submitSaveForm = (e) => {
+  e.preventDefault();
+  const newCard = {
+    name: addInputValue.value,
+    link: addInputImage.value,
+  };
+  addCard(newCard);
+  render();
+  reset();
+  toggleAddPopup();
+};
+
+/* const submitSaveForm = (e) => {
   e.preventDefault();
   const newCard = {
     name: addInputValue.value,
@@ -100,7 +111,7 @@ const submitSaveForm = (e) => {
   render();
   reset();
   toggleAddPopup();
-};
+}; */
 
 function reset() {
   addInputValue.value = "";
@@ -110,12 +121,11 @@ function reset() {
 initialCards.forEach(addCard);
 //
 
-let likeButton = document.querySelectorAll(".card__like");
 const likeClicked = () => {
   event.target.classList.toggle("card__like_clicked");
 };
 //
-let render = () => {
+const render = () => {
   let likeButton = document.querySelectorAll(".card__like");
   for (let i = 0; i < likeButton.length; i++) {
     likeButton[i].addEventListener("click", likeClicked);
@@ -123,7 +133,6 @@ let render = () => {
 };
 
 render();
-console.log(likeButton);
 //
 editButton.addEventListener("click", openPopup);
 closeButton.addEventListener("click", closePopup);
