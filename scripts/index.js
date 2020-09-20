@@ -10,14 +10,13 @@ const initialCards = [
       "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
   },
   {
-    name: "Иваново",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+    name: "Космос",
+    link: "http://img0.joyreactor.cc/pics/post/котэ-космос-6181760.png",
   },
   {
     name: "Камчатка",
     link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+      "http://img1.joyreactor.cc/pics/post/full/Том-и-Джерри-Мультфильмы-MOSSA-artist-6183737.jpeg",
   },
   {
     name: "Холмогорский район",
@@ -47,6 +46,21 @@ const addInputValue = document.querySelector(".popup__input-item_change_value");
 const addInputImage = document.querySelector(".popup__input-item_change_image");
 const addSaveForm = document.querySelector(".js__popup__container");
 
+///////////////////////////////////
+const ImagePopup = document.querySelector(".js__image");
+const toggleImagePopup = () => {
+  ImagePopup.classList.toggle("popup__image-open");
+};
+const openPopupImage = () => {
+  const inputImage = event.target.style.backgroundImage;
+  toggleImagePopup();
+  const imageP = document.querySelector(".popup__image");
+  imageP.style.backgroundImage = inputImage;
+};
+const imageCloseButton = document.querySelector(".js__image_close");
+imageCloseButton.addEventListener("click", toggleImagePopup);
+
+/////////////////////////////////
 const openPopup = () => {
   popup.classList.toggle("popup_is-opened");
   inputName.value = profileName.textContent;
@@ -57,8 +71,8 @@ const closePopup = () => {
   popup.classList.toggle("popup_is-opened");
 };
 
-const popupCloseByClickOnShadow = () => {
-  if (event.target != event.currentTarget) {
+const popupCloseByClickOnShadow = (e) => {
+  if (e.target != e.currentTarget) {
     return;
   }
   closePopup();
@@ -68,21 +82,38 @@ const toggleAddPopup = () => {
   popupAdd.classList.toggle("popup_is-opened");
 };
 
-const saveInput = (e) => {
-  e.preventDefault();
+const saveInput = () => {
+  event.preventDefault();
   profileName.textContent = inputName.value;
   profileStatus.textContent = inputStatus.value;
   popup.classList.toggle("popup_is-opened");
 };
 
-function addCard(cardObject, index) {
+const likeClicked = () => {
+  event.target.classList.toggle("card__like_clicked");
+};
+
+const deleteCard = () => {
+  event.target.closest(".card").remove();
+};
+
+const addCard = (cardObject) => {
   const htmlElement = templateCard.cloneNode(true);
   htmlElement.querySelector(
     ".card__image"
   ).style.backgroundImage = `url(${cardObject.link})`;
   htmlElement.querySelector(".card__title").innerText = cardObject.name;
+  htmlElement
+    .querySelector(".card__like")
+    .addEventListener("click", likeClicked);
+  htmlElement
+    .querySelector(".card__image")
+    .addEventListener("click", openPopupImage);
+  htmlElement
+    .querySelector(".card__delete")
+    .addEventListener("click", deleteCard);
   ulCards.prepend(htmlElement);
-}
+};
 
 const submitSaveForm = (e) => {
   e.preventDefault();
@@ -91,11 +122,47 @@ const submitSaveForm = (e) => {
     link: addInputImage.value,
   };
   addCard(newCard);
-  render();
   reset();
   toggleAddPopup();
 };
 
+function reset() {
+  addInputValue.value = "";
+  addInputImage.value = "";
+}
+
+initialCards.forEach(addCard);
+
+editButton.addEventListener("click", openPopup);
+closeButton.addEventListener("click", closePopup);
+saveForm.addEventListener("submit", saveInput);
+popup.addEventListener("click", popupCloseByClickOnShadow);
+addButton.addEventListener("click", toggleAddPopup);
+closeAddButton.addEventListener("click", toggleAddPopup);
+addSaveForm.addEventListener("submit", submitSaveForm);
+
+/*   let likeButton = document.querySelectorAll(".card__like");
+  for (let i = 0; i < likeButton.length; i++) {
+    likeButton[i].addEventListener("click", likeClicked);
+    break;
+  } */
+/*   let deleteButton = document.querySelectorAll(".card__delete");
+  for (let i = 0; i < deleteButton.length; i++) {
+    deleteButton[i].addEventListener("click", deleteCard);
+    break;
+  } */
+//
+
+//
+/* const render = () => {
+  let likeButton = document.querySelectorAll(".card__like");
+  for (let i = 0; i < likeButton.length; i++) {
+    likeButton[i].addEventListener("click", likeClicked);
+  }
+}; */
+
+/* render(); */
+//
 /* const submitSaveForm = (e) => {
   e.preventDefault();
   const newCard = {
@@ -112,32 +179,3 @@ const submitSaveForm = (e) => {
   reset();
   toggleAddPopup();
 }; */
-
-function reset() {
-  addInputValue.value = "";
-  addInputImage.value = "";
-}
-
-initialCards.forEach(addCard);
-//
-
-const likeClicked = () => {
-  event.target.classList.toggle("card__like_clicked");
-};
-//
-const render = () => {
-  let likeButton = document.querySelectorAll(".card__like");
-  for (let i = 0; i < likeButton.length; i++) {
-    likeButton[i].addEventListener("click", likeClicked);
-  }
-};
-
-render();
-//
-editButton.addEventListener("click", openPopup);
-closeButton.addEventListener("click", closePopup);
-saveForm.addEventListener("submit", saveInput);
-popup.addEventListener("click", popupCloseByClickOnShadow);
-addButton.addEventListener("click", toggleAddPopup);
-closeAddButton.addEventListener("click", toggleAddPopup);
-addSaveForm.addEventListener("submit", submitSaveForm);

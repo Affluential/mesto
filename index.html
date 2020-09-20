@@ -61,9 +61,17 @@
       <button type="reset" class="popup__close-button js__add_close" aria-label="Закрыть"></button>
     </form>
   </div>
+  <div class="popup js__image">
+    <div class="popup__wraper">
+      <div class="popup__image"></div>
+      <p class="popup__text">текст</p>
+      <button type="reset" class="popup__close-button js__image_close" aria-label="Закрыть"></button>
+    </div>
+  </div>
   <script src="./scripts/index.js" defer></script>
   <template class="template-card">
     <li class="card">
+      <button type="button" class="card__delete" aria-label="Удалить"></button>
       <div class="card__image"></div>
       <div class="card__column">
         <h2 class="card__title"></h2>

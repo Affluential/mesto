@@ -1,0 +1,9 @@
+.popup__image {
+  /*   background-image: url(../../../images/vyazemBig.jpg); */
+  /* width: 100%; */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 816px;
+  min-height: 540px;
+}
