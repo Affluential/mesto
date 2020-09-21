@@ -10,13 +10,14 @@ const initialCards = [
       "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
   },
   {
-    name: "Космос",
-    link: "http://img0.joyreactor.cc/pics/post/котэ-космос-6181760.png",
+    name: "Швейцария",
+    link:
+      "https://cdn.pixabay.com/photo/2018/07/26/07/45/valais-3562988_960_720.jpg",
   },
   {
-    name: "Камчатка",
+    name: "Япония",
     link:
-      "http://img1.joyreactor.cc/pics/post/full/Том-и-Джерри-Мультфильмы-MOSSA-artist-6183737.jpeg",
+      "https://cdn.pixabay.com/photo/2020/09/15/09/27/woman-5573135_960_720.jpg",
   },
   {
     name: "Холмогорский район",
@@ -51,11 +52,15 @@ const ImagePopup = document.querySelector(".js__image");
 const toggleImagePopup = () => {
   ImagePopup.classList.toggle("popup__image-open");
 };
-const openPopupImage = () => {
+const openPopupImage = (event) => {
   const inputImage = event.target.style.backgroundImage;
+  const card = event.target.closest(".card");
+  const valueText = card.querySelector(".card__title").textContent;
+  const inputText = document.querySelector(".popup__text");
   toggleImagePopup();
+  inputText.innerText = valueText;
   const imageP = document.querySelector(".popup__image");
-  imageP.style.backgroundImage = inputImage;
+  imageP.src = inputImage.slice(5, -2);
 };
 const imageCloseButton = document.querySelector(".js__image_close");
 imageCloseButton.addEventListener("click", toggleImagePopup);
