@@ -35,8 +35,8 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup js__popup-input">
-    <form class="popup__container" action="#" name="popupForm">
+  <div class="popup popup_type_profile">
+    <form class="popup__container popup__container_type_profile" action="#" name="popupForm">
       <h2 class="popup__title">Редактировать профиль</h2>
       <fieldset class="popup__input">
         <input type="text" name="nameChange" required placeholder="Ваше имя"
@@ -48,8 +48,8 @@
       <button type="reset" class="popup__close-button" aria-label="Закрыть"></button>
     </form>
   </div>
-  <div class="popup js__popup-add">
-    <form class="popup__container js__popup__container" action="#" name="popupForm">
+  <div class="popup popup_type_add">
+    <form class="popup__container popup_type_container" action="#" name="popupForm">
       <h2 class="popup__title">Новое место</h2>
       <fieldset class="popup__input">
         <input type="text" name="nameChange" required placeholder="Название"
@@ -57,15 +57,15 @@
         <input type="text" name="statusChange" required placeholder="Ссылка на картинку"
           class="popup__input-item popup__input-item_change_image">
       </fieldset>
-      <button type="submit" class="popup__save-button js__add_submit" value="Сохранить">Сохранить</button>
-      <button type="reset" class="popup__close-button js__add_close" aria-label="Закрыть"></button>
+      <button type="submit" class="popup__save-button" value="Сохранить">Сохранить</button>
+      <button type="reset" class="popup__close-button popup__close-button_add" aria-label="Закрыть"></button>
     </form>
   </div>
-  <div class="popup js__image">
+  <div class="popup popup_image_wrapper">
     <div class="popup__wraper">
       <img class="popup__image">
       <p class="popup__text"></p>
-      <button type="reset" class="popup__close-button js__image_close" aria-label="Закрыть"></button>
+      <button type="reset" class="popup__close-button popup__close-button_image" aria-label="Закрыть"></button>
     </div>
   </div>
   <script src="./scripts/index.js" defer></script>
