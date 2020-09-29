@@ -51,59 +51,9 @@ const addSaveForm = document.querySelector(".popup_type_container");
 const imagePopup = document.querySelector(".popup_image_wrapper");
 const inputText = document.querySelector(".popup__text");
 const imageP = document.querySelector(".popup__image");
-
-///////////////////////////////
-/* function popupOpen(popup) {
-  popup.classList.add("popup_opened");
-}
-
-function popupClose(popup) {
-  popup.classList.remove("popup_opened");
-} */
-//////////////////////////////
-
-const toggleImagePopup = () => {
-  imagePopup.classList.toggle("popup__image-open");
-};
-const openPopupImage = (event) => {
-  const inputImage = event.target.style.backgroundImage;
-  const card = event.target.closest(".card");
-  const valueText = card.querySelector(".card__title").textContent;
-  toggleImagePopup();
-  inputText.innerText = valueText;
-  imageP.src = inputImage.slice(5, -2);
-};
 const imageCloseButton = document.querySelector(".popup__close-button_image");
-imageCloseButton.addEventListener("click", toggleImagePopup);
-const openPopup = () => {
-  popupProfile.classList.toggle("popup_is-opened");
-  inputName.value = profileName.textContent;
-  inputStatus.value = profileStatus.textContent;
-};
 
-const closePopup = () => {
-  popupProfile.classList.toggle("popup_is-opened");
-};
-
-const toggleAddPopup = () => {
-  popupAdd.classList.toggle("popup_is-opened");
-};
-
-const saveInput = () => {
-  event.preventDefault();
-  profileName.textContent = inputName.value;
-  profileStatus.textContent = inputStatus.value;
-  popupProfile.classList.toggle("popup_is-opened");
-};
-
-const likeClicked = () => {
-  event.target.classList.toggle("card__like_clicked");
-};
-
-const deleteCard = () => {
-  event.target.closest(".card").remove();
-};
-
+//Создаем карточки
 const addCard = (cardObject) => {
   const htmlElement = templateCard.cloneNode(true);
   htmlElement.querySelector(
@@ -122,6 +72,67 @@ const addCard = (cardObject) => {
   ulCards.prepend(htmlElement);
 };
 
+//Функции открытия и закрытия попапов
+function popupOpen(popup) {
+  popup.classList.add("popup_is-opened");
+}
+function popupClose(popup) {
+  popup.classList.remove("popup_is-opened");
+}
+
+//Вызовы открытия и закрытия
+const openAddPopup = () => {
+  popupOpen(popupAdd);
+};
+const closeAddPopup = () => {
+  popupClose(popupAdd);
+};
+const imageClosePopup = () => {
+  popupClose(imagePopup);
+  reset();
+};
+const closeProfilePopup = () => {
+  popupClose(popupProfile);
+};
+
+//Попап с картинкой
+const openPopupImage = (event) => {
+  const inputImage = event.target.style.backgroundImage;
+  const card = event.target.closest(".card");
+  const valueText = card.querySelector(".card__title").textContent;
+  popupOpen(imagePopup);
+  inputText.innerText = valueText;
+  imageP.src = inputImage.slice(5, -2);
+};
+imageCloseButton.addEventListener("click", imageClosePopup);
+
+//Попап с редактированием профайла
+const openPopupProfile = () => {
+  popupOpen(popupProfile);
+  inputName.value = profileName.textContent;
+  inputStatus.value = profileStatus.textContent;
+};
+editButton.addEventListener("click", openPopupProfile);
+
+//Сохранение информации из попапа редактирования
+const saveInput = (e) => {
+  e.preventDefault();
+  profileName.textContent = inputName.value;
+  profileStatus.textContent = inputStatus.value;
+  popupClose(popupProfile);
+};
+
+//Кнопка лайка
+const likeClicked = (e) => {
+  e.target.classList.toggle("card__like_clicked");
+};
+
+//Удаление карточки
+const deleteCard = (e) => {
+  e.target.closest(".card").remove();
+};
+
+//Сохранение картинки
 const submitSaveForm = (e) => {
   e.preventDefault();
   const newCard = {
@@ -129,10 +140,11 @@ const submitSaveForm = (e) => {
     link: addInputImage.value,
   };
   addCard(newCard);
+  closeAddPopup();
   reset();
-  toggleAddPopup();
 };
 
+//Очищение полей форм в попапе добавления картинок
 function reset() {
   addInputValue.value = "";
   addInputImage.value = "";
@@ -140,11 +152,11 @@ function reset() {
 
 initialCards.forEach(addCard);
 
-editButton.addEventListener("click", openPopup);
-closeButton.addEventListener("click", closePopup);
+editButton.addEventListener("click", openPopupProfile);
+closeButton.addEventListener("click", closeProfilePopup);
 submitFormProfile.addEventListener("submit", saveInput);
-addButton.addEventListener("click", toggleAddPopup);
-closeAddButton.addEventListener("click", toggleAddPopup);
+addButton.addEventListener("click", openAddPopup);
+closeAddButton.addEventListener("click", closeAddPopup);
 addSaveForm.addEventListener("submit", submitSaveForm);
 
 //feature
