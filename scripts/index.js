@@ -196,8 +196,3 @@ const popupCloseByClickOnShadow = (e) => {
 popupProfile.addEventListener("click", popupCloseByClickOnShadow);
 popupAdd.addEventListener("click", popupCloseByClickOnShadow);
 imagePopup.addEventListener("click", popupCloseByClickOnShadow);
-
-/* const resetError = (popup) => {
-  const inputError = popup.querySelector(".popup__input-error");
-  inputError.remove("popup__input-error-active");
-}; */
