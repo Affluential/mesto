@@ -40,9 +40,13 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <fieldset class="popup__input">
         <input type="text" name="nameChange" required placeholder="Ваше имя"
-          class="popup__input-item popup__input-item_change_name">
+          class="popup__input-item popup__input-item_change_name" id="sign-in-name" autocomplete="off" minlength="2"
+          maxlength="40" required>
+        <span class="popup__input-error" id="sign-in-name-error"></span>
         <input type="text" name="statusChange" required placeholder="Ваше занятие"
-          class="popup__input-item popup__input-item_change_status">
+          class="popup__input-item popup__input-item_change_status" id="sign-in-status" autocomplete="off" minlength="2"
+          maxlength="200" required>
+        <span class="popup__input-error" id="sign-in-status-error"></span>
       </fieldset>
       <button type="submit" class="popup__save-button" value="Сохранить">Сохранить</button>
       <button type="reset" class="popup__close-button" aria-label="Закрыть"></button>
@@ -53,9 +57,12 @@
       <h2 class="popup__title">Новое место</h2>
       <fieldset class="popup__input">
         <input type="text" name="nameChange" required placeholder="Название"
-          class="popup__input-item popup__input-item_change_value">
-        <input type="text" name="statusChange" required placeholder="Ссылка на картинку"
-          class="popup__input-item popup__input-item_change_image">
+          class="popup__input-item popup__input-item_change_value" id="sign-in-title" autocomplete="off" minlength="2"
+          maxlength="30" required>
+        <span class="popup__input-error" id="sign-in-title-error"></span>
+        <input type="url" name="statusChange" required placeholder="Ссылка на картинку"
+          class="popup__input-item popup__input-item_change_image" id="sign-in-url" autocomplete="off" required>
+        <span class="popup__input-error" id="sign-in-url-error"></span>
       </fieldset>
       <button type="submit" class="popup__save-button" value="Сохранить">Сохранить</button>
       <button type="reset" class="popup__close-button popup__close-button_add" aria-label="Закрыть"></button>
@@ -69,6 +76,7 @@
     </div>
   </div>
   <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
   <template class="template-card">
     <li class="card">
       <button type="button" class="card__delete" aria-label="Удалить"></button>

@@ -12,6 +12,9 @@
   line-height: 17px;
 }
 
+.popup__input-item:invalid {
+  border-color: rgb(255, 0, 0);
+}
 @media screen and (max-width: 513px) {
   .popup__input-item {
     width: 70%;
