@@ -13,6 +13,10 @@
   line-height: 17px;
 }
 
+.popup__input-item:invalid {
+  box-shadow: none;
+}
+
 @media screen and (max-width: 513px) {
   .popup__input-item {
     width: 70%;
