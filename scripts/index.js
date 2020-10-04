@@ -43,7 +43,6 @@ const addCard = (cardObject) => {
 
 //Закрытие попапа по нажатию esc
 function closePopupByEscButton(e) {
-  console.log(e);
   const popupOpened = document.querySelector(".popup_is-opened");
   if (e.key === "Escape" && popupOpened) {
     popupClose(popupOpened);
