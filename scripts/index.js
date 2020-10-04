@@ -177,6 +177,6 @@ const popupCloseByClickOnShadow = (e) => {
   }
   popupClose(e.target);
 };
-popupProfile.addEventListener("click", popupCloseByClickOnShadow);
-popupAdd.addEventListener("click", popupCloseByClickOnShadow);
-imagePopup.addEventListener("click", popupCloseByClickOnShadow);
+popupProfile.addEventListener("mousedown", popupCloseByClickOnShadow);
+popupAdd.addEventListener("mousedown", popupCloseByClickOnShadow);
+imagePopup.addEventListener("mousedown", popupCloseByClickOnShadow);
