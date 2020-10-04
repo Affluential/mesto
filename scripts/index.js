@@ -97,6 +97,7 @@ const openPopupImage = (event) => {
   const valueText = card.querySelector(".card__title").textContent;
   inputText.innerText = valueText;
   imageP.src = inputImage.slice(5, -2);
+  imageP.alt = valueText;
   popupOpen(imagePopup);
 };
 imageCloseButton.addEventListener("click", imageClosePopup);
