@@ -21,6 +21,7 @@ const inputText = document.querySelector(".popup__text");
 const imageP = document.querySelector(".popup__image");
 const imageCloseButton = document.querySelector(".popup__close-button_image");
 const pageListener = document.querySelector(".page");
+const escButton = "Escape";
 
 //Создаем карточки
 const addCard = (cardObject) => {
@@ -44,7 +45,7 @@ const addCard = (cardObject) => {
 //Закрытие попапа по нажатию esc
 function closePopupByEscButton(e) {
   const popupOpened = document.querySelector(".popup_is-opened");
-  if (e.key === "Escape" && popupOpened) {
+  if (e.key === escButton && popupOpened) {
     popupClose(popupOpened);
   }
 }
