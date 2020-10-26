@@ -65,6 +65,10 @@ const inputPopupProfile = () => {
   inputStatus.value = profileStatus.textContent;
 };
 const openPopupProfile = () => {
+  popupProfile.querySelector(".popup__save-button_disabled") &&
+    popupProfile
+      .querySelector(config.formSaveButton)
+      .classList.remove(config.formSaveButtonDsblCls);
   popupOpen(popupProfile);
   inputPopupProfile();
 };
@@ -81,6 +85,10 @@ const saveInput = (e) => {
 //Очищение полей форм в попапе добавления картинок
 function resetValue() {
   addSaveForm.reset();
+  popupAdd.querySelector(".popup__save-button_disabled") ||
+    popupAdd
+      .querySelector(config.formSaveButton)
+      .classList.add(config.formSaveButtonDsblCls);
 }
 //////////////////////////////////////////////////////////
 //Создаём карточки из библиотеки с помощью класса Card
