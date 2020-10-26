@@ -8,6 +8,7 @@ class FormValidator {
     this._formElements = config.formElements;
     this._formSaveButton = config.formSaveButton;
     this._formInputItem = config.formInputItem;
+    this._button = this._formElement.querySelector(this._formSaveButton);
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -51,25 +52,29 @@ class FormValidator {
       button.removeAttribute("disabled");
     }
   }
-
+  _buttonDisabled() {
+    this._button.classList.add(this._formSaveButtonDsblCls);
+    this._button.setAttribute("disabled", true);
+  }
   _setEventListeners() {
     const inputArray = Array.from(
       this._formElement.querySelectorAll(this._formInputItem)
     );
-    const button = this._formElement.querySelector(this._formSaveButton);
     inputArray.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButton(inputArray, button);
+        this._toggleButton(inputArray, this._button);
       });
     });
-    this._toggleButton(inputArray, button);
+    this._toggleButton(inputArray, this._button);
   }
 
   enableValidation = () => {
     const submitFormHandler = (event) => {
       event.preventDefault();
+      this._buttonDisabled();
     };
+
     this._formElement.addEventListener("submit", submitFormHandler);
     this._setEventListeners();
   };

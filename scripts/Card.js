@@ -1,9 +1,9 @@
+import { openPopupImage } from "./index.js";
 class Card {
-  constructor(name, link, cardSelector, imagePopup) {
-    (this._name = name),
-      (this._link = link),
-      (this._cardSelector = cardSelector),
-      (this._imagePopup = imagePopup);
+  constructor(name, link, cardSelector) {
+    this._name = name;
+    this._link = link;
+    this._cardSelector = cardSelector;
   }
   _getTemplate() {
     return document.querySelector(this._cardSelector).content.cloneNode(true)
@@ -18,7 +18,7 @@ class Card {
     this._element.remove();
   }
   _openImage() {
-    this._imagePopup(this._name, this._link);
+    openPopupImage(this._name, this._link);
   }
   _setListeners() {
     this._element
