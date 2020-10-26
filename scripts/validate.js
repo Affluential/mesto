@@ -42,19 +42,17 @@ class FormValidator {
   _hasInvalidInput(inputArray) {
     return inputArray.some((inputElement) => !inputElement.validity.valid);
   }
-
+  _buttonDisabled() {
+    this._button.classList.add(this._formSaveButtonDsblCls);
+    this._button.setAttribute("disabled", true);
+  }
   _toggleButton(inputArray, button) {
     if (this._hasInvalidInput(inputArray)) {
-      button.classList.add(this._formSaveButtonDsblCls);
-      button.setAttribute("disabled", true);
+      this._buttonDisabled();
     } else {
       button.classList.remove(this._formSaveButtonDsblCls);
       button.removeAttribute("disabled");
     }
-  }
-  _buttonDisabled() {
-    this._button.classList.add(this._formSaveButtonDsblCls);
-    this._button.setAttribute("disabled", true);
   }
   _setEventListeners() {
     const inputArray = Array.from(
@@ -74,7 +72,6 @@ class FormValidator {
       event.preventDefault();
       this._buttonDisabled();
     };
-
     this._formElement.addEventListener("submit", submitFormHandler);
     this._setEventListeners();
   };

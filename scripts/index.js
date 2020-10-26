@@ -40,8 +40,7 @@ function popupOpen(popup) {
     errorReset(popup);
   }
 }
-//////////////////////////////////////////////////////////
-//Закрытие попапа
+
 function popupClose(popup) {
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keyup", closePopupByEscButton);
@@ -52,7 +51,7 @@ const openPopupImage = (name, link) => {
   const inputImage = link;
   const valueText = name;
   inputText.innerText = valueText;
-  imageP.src = inputImage /* inputImage.slice(5, -2) */;
+  imageP.src = inputImage;
   imageP.alt = valueText;
   popupOpen(imagePopup);
 };
@@ -61,11 +60,13 @@ imageCloseButton.addEventListener("click", () => {
 });
 //////////////////////////////////////////////////////////
 //Попап с редактированием профайла
+const inputPopupProfile = () => {
+  inputName.value = profileName.textContent;
+  inputStatus.value = profileStatus.textContent;
+};
 const openPopupProfile = () => {
   popupOpen(popupProfile);
   inputPopupProfile();
-  inputName.value = profileName.textContent;
-  inputStatus.value = profileStatus.textContent;
 };
 editButton.addEventListener("click", openPopupProfile);
 //////////////////////////////////////////////////////////
@@ -75,12 +76,6 @@ const saveInput = (e) => {
   profileName.textContent = inputName.value;
   profileStatus.textContent = inputStatus.value;
   popupClose(popupProfile);
-};
-//////////////////////////////////////////////////////////
-//Заполнение профайла
-const inputPopupProfile = () => {
-  inputName.value = profileName.textContent;
-  inputStatus.value = profileStatus.textContent;
 };
 //////////////////////////////////////////////////////////
 //Очищение полей форм в попапе добавления картинок
