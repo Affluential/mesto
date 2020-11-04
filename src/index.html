@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body>
@@ -16,7 +15,7 @@
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <div class="profile__avatar" style="background-image: url(./images/avatar.png);"></div>
+          <div class="profile__avatar"></div>
           <div class="profile__column">
             <h1 class="profile__name">Пушкин Александр Сергеевич</h1>
             <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
@@ -70,12 +69,11 @@
   </div>
   <div class="popup popup_image_wrapper">
     <div class="popup__wraper">
-      <img class="popup__image" alt="#">
+      <img class="popup__image" alt="#" src="#">
       <p class="popup__text"></p>
       <button type="reset" class="popup__close-button popup__close-button_image" aria-label="Закрыть"></button>
     </div>
   </div>
-  <script src="./scripts/index.js" type="module" defer></script>
   <template class="template-card">
     <li class="card">
       <button type="button" class="card__delete" aria-label="Удалить"></button>

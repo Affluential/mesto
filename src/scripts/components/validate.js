@@ -67,14 +67,14 @@ class FormValidator {
     this._toggleButton(inputArray, this._button);
   }
 
-  enableValidation = () => {
+  enableValidation() {
     const submitFormHandler = (event) => {
       event.preventDefault();
       this._buttonDisabled();
     };
     this._formElement.addEventListener("submit", submitFormHandler);
     this._setEventListeners();
-  };
+  }
 }
 
 export default FormValidator;
