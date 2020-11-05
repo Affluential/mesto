@@ -1,92 +1,71 @@
-import "../../pages/index.css";
-import Card from "../components/Card.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import UserInfo from "../components/UserInfo.js";
-import FormValidator from "../components/validate.js";
-import Section from "../components/Section.js";
-import { errorReset } from "../utils/utils.js";
+import "./index.css";
+import Card from "../scripts/components/Card.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import UserInfo from "../scripts/components/UserInfo.js";
+import FormValidator from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
 import {
   initialCards,
   config,
-  popupProfile,
-  popupAdd,
   editButton,
   addButton,
-  ulCards,
-  profileName,
-  profileStatus,
   inputName,
   inputStatus,
-  imagePopup,
-} from "../utils/constants.js";
+} from "../scripts/utils/constants.js";
 
 /////////////////////////////////////////////////////////
 //Добавляем на страницу карточки из стандартного списка
 /////////////////////////////////////////////////////////
+const createCard = (item) => {
+  const card = new Card({ item }, config.templateCard, openImagePopup);
+  const element = card.getElement();
+  return element;
+};
 
 //Создаем класс попапа картинок
-const openedPopupImage = new PopupWithImage(imagePopup);
+const openedPopupImage = new PopupWithImage(".popup_image_wrapper");
+openedPopupImage.setEventListeners();
 
 //Создаем функцию открывающую попап с картинкой
 const openImagePopup = (name, link) => {
-  openedPopupImage.setEventListeners();
   openedPopupImage.open(name, link);
 };
 
 //Создаём секции из стандартного списка и добавляем их в DOM
-const defaultPageCard = new Section(
+const cardsSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card({ item }, config.templateCard, openImagePopup);
-      const element = card.getElement();
-      defaultPageCard.setItems(element);
+      cardsSection.addItem(createCard(item));
     },
   },
-  ulCards
+  ".cards"
 );
-
-//Запускаем для items функцию renderer
-defaultPageCard.renderItems();
-
+cardsSection.renderItems();
 /////////////////////////////////////////////////////////
 //Попап с с добавлением картинок
 /////////////////////////////////////////////////////////
 //Функция принимающая данные из инпутов и вставляющая карточки в DOM
 const addCard = ({ nameChange, statusChange }) => {
-  const valueItem = [{ name: nameChange, link: statusChange }];
-  const newSection = new Section(
-    {
-      items: valueItem,
-      renderer: (item) => {
-        const card = new Card({ item }, config.templateCard, openImagePopup);
-        const element = card.getElement();
-        newSection.setItems(element);
-      },
-    },
-    ulCards
-  );
-  newSection.renderItems();
+  const valueItem = { name: nameChange, link: statusChange };
+  cardsSection.addItem(createCard(valueItem));
 };
 
 //Попап с добавлением картинок. Запускает функцию addCard подставляя введённые пользователем данные.
-const popupAddClass = new PopupWithForm(popupAdd, addCard);
+const popupAddClass = new PopupWithForm(".popup_type_add", addCard);
+popupAddClass.setEventListeners();
 
 const openPopupAdd = () => {
   popupAddClass.open();
-  popupAddClass.setEventListeners();
-  errorReset(popupAdd);
+  formAddValidator.clearErrors();
 };
-
 addButton.addEventListener("click", openPopupAdd);
-
 /////////////////////////////////////////////////////////
 //Попап с профайлом
 /////////////////////////////////////////////////////////
-
 //UserInfo вставляет информацию в DOM и забирает её оттуда.
-const userInfo = new UserInfo(profileName, profileStatus);
+const userInfo = new UserInfo(".profile__name", ".profile__status");
 
 //Вставляем данные из инпутов в DOM
 const handleSubmitProfile = ({ nameChange, statusChange }) => {
@@ -94,25 +73,21 @@ const handleSubmitProfile = ({ nameChange, statusChange }) => {
 };
 
 //Создаем попап с профайлом.
-const popupProfileClass = new PopupWithForm(popupProfile, handleSubmitProfile);
+const popupProfileClass = new PopupWithForm(
+  ".popup_type_profile",
+  handleSubmitProfile
+);
+popupProfileClass.setEventListeners();
 
 //Функция открытия попапа Профайла при клике на кнопку редактирования профайла.
 const openPopupProfile = () => {
   const profileTextContent = userInfo.getUserInfo();
   inputName.value = profileTextContent.name;
   inputStatus.value = profileTextContent.info;
-  popupProfile.querySelector(".popup__save-button_disabled") &&
-    popupProfile
-      .querySelector(config.formSaveButton)
-      .classList.remove(config.formSaveButtonDsblCls);
-  document.querySelector(config.formSaveButton).removeAttribute("disabled");
-  errorReset(popupProfile);
+  formProfileValidator.clearErrors();
   popupProfileClass.open();
-  popupProfileClass.setEventListeners();
 };
-
 editButton.addEventListener("click", openPopupProfile);
-
 /////////////////////////////////////////////////////////
 //Запуск валидации
 /////////////////////////////////////////////////////////

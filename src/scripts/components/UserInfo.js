@@ -1,7 +1,7 @@
 class UserInfo {
   constructor(userName, userStatus) {
-    this._userName = userName;
-    this._userStatus = userStatus;
+    this._userName = document.querySelector(userName);
+    this._userStatus = document.querySelector(userStatus);
   }
   getUserInfo() {
     const userData = {

@@ -1,11 +1,9 @@
 class Popup {
   constructor(popupSelector) {
-    this._popupSelector = popupSelector;
+    this._popupSelector = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
     this.close = this.close.bind(this);
-    this._popupCloseByClickOnShadow = this._popupCloseByClickOnShadow.bind(
-      this
-    );
+    this._closeByClickOnOverlay = this._closeByClickOnOverlay.bind(this);
   }
   _handleEscClose(e) {
     if (e.key === "Escape") {
@@ -20,7 +18,7 @@ class Popup {
     this._popupSelector.classList.remove("popup_is-opened");
     document.removeEventListener("keyup", this._handleEscClose);
   }
-  _popupCloseByClickOnShadow(e) {
+  _closeByClickOnOverlay(e) {
     if (e.target != e.currentTarget) {
       return;
     }
@@ -33,7 +31,7 @@ class Popup {
     closeButton.addEventListener("click", this.close);
     this._popupSelector.addEventListener(
       "mousedown",
-      this._popupCloseByClickOnShadow
+      this._closeByClickOnOverlay
     );
   }
 }
