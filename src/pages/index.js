@@ -125,7 +125,7 @@ const handleSubmitProfile = ({ nameChange, statusChange }) => {
   api
     .setUserInfo(userApiInfo)
     .then((data) => {
-      userInfo.setUserInfo(data.name, data.about, data.avatar);
+      userInfo.setUserInfo(data.name, data.about, false);
     })
     .catch((err) => console.log(`Ошибка:${err}`))
     .finally(

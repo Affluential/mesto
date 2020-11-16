@@ -14,7 +14,7 @@ class UserInfo {
   setUserInfo(name, status, avatar) {
     this._userName.textContent = name; //Вставляет имя и статус на станицу.
     this._userStatus.textContent = status;
-    this._avatar.style.backgroundImage = `url(${avatar})`;
+    avatar && (this._avatar.style.backgroundImage = `url(${avatar})`);
   }
   setAvatar(avatar) {
     this._avatar.style.backgroundImage = `url(${avatar})`;
