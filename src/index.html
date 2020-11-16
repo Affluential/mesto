@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body>
@@ -15,11 +16,11 @@
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <div class="profile__avatar"></div>
+          <div class="profile__avatar"><button class="profile__avatar-edit"></button></div>
           <div class="profile__column">
-            <h1 class="profile__name">Пушкин Александр Сергеевич</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
-            <p class="profile__status">Писатель</p>
+            <p class="profile__status"></p>
           </div>
         </div>
         <button type="button" class="profile__add-button" aria-label="Добавить"></button>
@@ -67,6 +68,28 @@
       <button type="reset" class="popup__close-button popup__close-button_add" aria-label="Закрыть"></button>
     </form>
   </div>
+  <div class="popup popup_type_avatar">
+    <form class="popup__container popup_type_container" action="#" name="popupForm">
+      <h2 class="popup__title">Новое место</h2>
+      <fieldset class="popup__input">
+        <input type="url" name="statusChange" required placeholder="Ссылка на аватар"
+          class="popup__input-item popup__input-item_change_image" id="sign-in-url" autocomplete="off" required>
+        <span class="popup__input-error" id="sign-in-url-error"></span>
+      </fieldset>
+      <button type="submit" class="popup__save-button" value="Сохранить">Сохранить</button>
+      <button type="reset" class="popup__close-button popup__close-button_add" aria-label="Закрыть"></button>
+    </form>
+  </div>
+
+  <div class="popup popup__delete-confirm">
+    <form class="popup__container" action="#" name="popupForm">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button type="submit" class="popup__save-button" value="Сохранить">Да</button>
+      <button type="reset" class="popup__close-button popup__close-button_add" aria-label="Закрыть"></button>
+    </form>
+  </div>
+
+
   <div class="popup popup_image_wrapper">
     <div class="popup__wraper">
       <img class="popup__image" alt="#" src="#">
@@ -74,13 +97,20 @@
       <button type="reset" class="popup__close-button popup__close-button_image" aria-label="Закрыть"></button>
     </div>
   </div>
+  <script src="./pages/index.js" type="module" defer></script>
   <template class="template-card">
     <li class="card">
       <button type="button" class="card__delete" aria-label="Удалить"></button>
       <div class="card__image"></div>
       <div class="card__column">
         <h2 class="card__title"></h2>
-        <button type="button" class="card__like" aria-label="Понравилось"></button>
+        <div class="card__like-wrapper">
+          <button type="button" class="card__like" aria-label="Понравилось"></button>
+          <p class="card__like-counter">0</p>
+        </div>
+
+
+
       </div>
     </li>
   </template>

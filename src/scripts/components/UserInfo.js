@@ -1,7 +1,8 @@
 class UserInfo {
-  constructor(userName, userStatus) {
+  constructor(userName, userStatus, avatar) {
     this._userName = document.querySelector(userName);
     this._userStatus = document.querySelector(userStatus);
+    this._avatar = document.querySelector(avatar);
   }
   getUserInfo() {
     const userData = {
@@ -10,9 +11,13 @@ class UserInfo {
     }; //Возвращает имя и статус со страницы
     return userData;
   }
-  setUserInfo(name, status) {
+  setUserInfo(name, status, avatar) {
     this._userName.textContent = name; //Вставляет имя и статус на станицу.
     this._userStatus.textContent = status;
+    this._avatar.style.backgroundImage = `url(${avatar})`;
+  }
+  setAvatar(avatar) {
+    this._avatar.style.backgroundImage = `url(${avatar})`;
   }
 }
 export default UserInfo;
