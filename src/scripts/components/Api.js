@@ -38,7 +38,7 @@ class Api {
     });
   }
   deleteCard(id) {
-    this._obtainData(`/cards/${id}`, {
+    return this._obtainData(`/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
     });
@@ -55,7 +55,7 @@ class Api {
       headers: this._headers,
     });
   }
-  avatarChange(avatarUrl) {
+  changeAvatar(avatarUrl) {
     return this._obtainData(`/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,

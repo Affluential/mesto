@@ -3,38 +3,30 @@ class Card {
     { item },
     cardSelector,
     openPopupImage,
-    openPopupDelete,
+    popupWithDelete,
     myId,
-    api
+    handleLikeButton
   ) {
     this._name = item.name;
     this._link = item.link;
     this._id = item._id;
     this._owner = item.owner;
     this._likes = item.likes;
-    this._api = api;
+    this._handleLikeButton = handleLikeButton;
     this._myId = myId;
     this._cardSelector = cardSelector;
     this._openPopupImage = openPopupImage;
-    this._openPopupDelete = openPopupDelete;
+    this._popupWithDelete = popupWithDelete;
   }
 
   _getTemplate() {
     return document.querySelector(this._cardSelector).content.cloneNode(true)
       .children[0];
   }
-  _handleLikeButton() {
+  _handleLike() {
     const likeButton = this._element.querySelector(".card__like");
     const likeCounter = this._element.querySelector(".card__like-counter");
-    !likeButton.classList.contains("card__like_clicked")
-      ? this._api.like(this._id).then((data) => {
-          likeButton.classList.add("card__like_clicked");
-          likeCounter.textContent = `${data.likes.length}`;
-        })
-      : this._api.dislike(this._id).then((data) => {
-          likeButton.classList.remove("card__like_clicked");
-          likeCounter.textContent = `${data.likes.length}`;
-        });
+    this._handleLikeButton(likeButton, likeCounter, this._id);
   }
   _deleteCard() {
     this._element.remove();
@@ -45,10 +37,10 @@ class Card {
   _setListeners() {
     this._element
       .querySelector(".card__delete")
-      .addEventListener("click", () => this._openPopupDelete(this));
+      .addEventListener("click", () => this._popupWithDelete.open(this));
     this._element
       .querySelector(".card__like")
-      .addEventListener("click", () => this._handleLikeButton());
+      .addEventListener("click", () => this._handleLike());
     this._element
       .querySelector(".card__image")
       .addEventListener("click", () => this._openImage());

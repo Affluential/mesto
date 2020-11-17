@@ -9,6 +9,11 @@ export const config = {
   formTypeAdd: ".popup_type_add",
   formTypeProfile: ".popup_type_profile",
   formTypeAvatar: ".popup_type_avatar",
+  formTypeImage: ".popup_image_wrapper",
+  formTypeDelete: ".popup__delete-confirm",
+  profileName: ".profile__name",
+  profileStatus: ".profile__status",
+  profileAvatar: ".profile__avatar",
 };
 export const popupProfile = document.querySelector(".popup_type_profile");
 export const editButton = document.querySelector(".profile__edit-button");
