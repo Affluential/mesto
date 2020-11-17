@@ -64,11 +64,11 @@ const handleSubmitProfile = ({ nameChange, statusChange }) => {
     .then((data) => {
       userInfo.setUserInfo(data.name, data.about, false);
     })
-    .catch((err) => console.log(`Ошибка:${err}`))
     .finally(
       popupProfileClass.close(),
       renderLoading(false, config.formTypeProfile)
-    );
+    )
+    .catch((err) => console.log(`Ошибка:${err}`));
 };
 
 //Создаем попап с профайлом.
@@ -98,10 +98,10 @@ const addCard = ({ nameChange, statusChange }) => {
     .then(([res, userData]) => {
       cardsSection.addItem(createCard(res, userData._id));
     })
+    .finally(popupAddCard.close(), renderLoading(false, config.formTypeAdd))
     .catch((err) => {
       console.log(`Ошибка:${err}`);
-    })
-    .finally(popupAddCard.close(), renderLoading(false, config.formTypeAdd));
+    });
 };
 
 //Попап с добавлением картинок. Запускает функцию addCard подставляя введённые пользователем данные.
