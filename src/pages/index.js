@@ -91,7 +91,7 @@ editButton.addEventListener("click", openPopupProfile);
 //Попап с с добавлением картинок
 /////////////////////////////////////////////////////////
 //Функция принимающая данные из инпутов и вставляющая карточки в DOM
-const addCard = ({ nameChange, statusChange }) => {
+/* const addCard = ({ nameChange, statusChange }) => {
   renderLoading(true, config.formTypeAdd);
   const cardData = { name: nameChange, link: statusChange };
   Promise.all([api.addCard(cardData), api.getUserName()])
@@ -102,17 +102,19 @@ const addCard = ({ nameChange, statusChange }) => {
     .catch((err) => {
       console.log(`Ошибка:${err}`);
     });
-};
+}; */
+////////////////
 
+/////////////////
 //Попап с добавлением картинок. Запускает функцию addCard подставляя введённые пользователем данные.
-const popupAddCard = new PopupWithForm(config.formTypeAdd, addCard);
+/* const popupAddCard = new PopupWithForm(config.formTypeAdd, addCard);
 popupAddCard.setEventListeners();
 
 const openPopupAdd = () => {
   popupAddCard.open();
   formAddValidator.clearErrors();
 };
-addButton.addEventListener("click", openPopupAdd);
+addButton.addEventListener("click", openPopupAdd); */
 /////////////////////////////////////////////////////////
 //Попап с аватаром
 /////////////////////////////////////////////////////////
@@ -167,10 +169,33 @@ Promise.all([api.getInitialCards(), api.getUserName()])
     );
     cardsSection.renderItems(res);
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+    const addCard = ({ nameChange, statusChange }) => {
+      renderLoading(true, config.formTypeAdd);
+      const cardData = { name: nameChange, link: statusChange };
+      api
+        .addCard(cardData)
+        .then((res) => {
+          cardsSection.addItem(createCard(res, userData._id));
+        })
+        .finally(popupAddCard.close(), renderLoading(false, config.formTypeAdd))
+        .catch((err) => {
+          console.log(`Ошибка:${err}`);
+        });
+    };
+    const popupAddCard = new PopupWithForm(config.formTypeAdd, addCard);
+    popupAddCard.setEventListeners();
+    const openPopupAdd = () => {
+      popupAddCard.open();
+      formAddValidator.clearErrors();
+    };
+    addButton.addEventListener("click", openPopupAdd);
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
   });
+////////////////
+
+//////////////////
 /////////////////////////////////////////////////////////
 //Запуск валидации
 /////////////////
