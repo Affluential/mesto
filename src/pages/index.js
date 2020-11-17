@@ -155,26 +155,25 @@ const createCard = (item, myId) => {
 };
 
 //Создаём секции из стандартного списка и добавляем их в DOM
-const cardsSection = new Section(
-  {
-    renderer: (item, myId) => {
-      cardsSection.addItem(createCard(item, myId));
-    },
-  },
-  ulCards
-);
 Promise.all([api.getInitialCards(), api.getUserName()])
   .then(([res, userData]) => {
-    cardsSection.renderItems(res, userData._id);
+    const cardsSection = new Section(
+      {
+        renderer: (item) => {
+          cardsSection.addItem(createCard(item, userData._id));
+        },
+      },
+      ulCards
+    );
+    cardsSection.renderItems(res);
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
   });
-
 /////////////////////////////////////////////////////////
 //Запуск валидации
-/////////////////////////////////////////////////////////
+/////////////////
 const formAddValidator = new FormValidator(config.formTypeAdd, config);
 formAddValidator.enableValidation();
 const formProfileValidator = new FormValidator(config.formTypeProfile, config);
