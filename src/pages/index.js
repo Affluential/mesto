@@ -145,18 +145,13 @@ const createCard = (item, myId) => {
   const card = new Card(
     { item },
     config.templateCard,
-    openImagePopup,
+    popupImage,
     popupWithDelete,
     myId,
     handleLikeButton
   );
   const element = card.getElement();
   return element;
-};
-
-//Создаем функцию открывающую попап с картинкой
-const openImagePopup = (name, link) => {
-  popupImage.open(name, link);
 };
 
 //Создаём секции из стандартного списка и добавляем их в DOM

@@ -32,7 +32,7 @@ class Card {
     this._element.remove();
   }
   _openImage() {
-    this._openPopupImage(this._name, this._link);
+    this._openPopupImage.open(this._name, this._link);
   }
   _setListeners() {
     this._element
