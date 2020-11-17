@@ -1,4 +1,4 @@
-/* import "./index.css"; */
+import "./index.css";
 import Api from "../scripts/components/Api.js";
 import Card from "../scripts/components/Card.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
