@@ -101,8 +101,8 @@ const handleSubmitAvatar = (avatarUrl) => {
   api
     .changeAvatar(avatarUrl.statusChange)
     .then((data) => userInfo.setUserInfo(false, false, data.avatar))
-    .finally(avatarPopup.close(), renderLoading(false, config.formTypeAvatar))
-    .catch((err) => console.log(`Ошибка:${err}`));
+    .catch((err) => console.log(`Ошибка:${err}`))
+    .finally(avatarPopup.close(), renderLoading(false, config.formTypeAvatar));
 };
 //Создаем сам класс передаём в него обработчик
 const avatarPopup = new PopupWithForm(
