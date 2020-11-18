@@ -18,7 +18,7 @@ export const config = {
 export const popupProfile = document.querySelector(".popup_type_profile");
 export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");
-export const ulCards = document.querySelector(".cards");
+export const cardOnPage = document.querySelector(".cards");
 export const inputName = document.querySelector(
   ".popup__input-item_change_name"
 );

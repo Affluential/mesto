@@ -14,7 +14,7 @@ import {
   inputName,
   inputStatus,
   avatarButton,
-  ulCards,
+  cardOnPage,
 } from "../scripts/utils/constants.js";
 import { renderLoading } from "../scripts/utils/utils.js";
 //////////////////
@@ -64,11 +64,11 @@ const handleSubmitProfile = ({ nameChange, statusChange }) => {
     .then((data) => {
       userInfo.setUserInfo(data.name, data.about, false);
     })
+    .catch((err) => console.log(`Ошибка:${err}`))
     .finally(
       popupProfileClass.close(),
       renderLoading(false, config.formTypeProfile)
-    )
-    .catch((err) => console.log(`Ошибка:${err}`));
+    );
 };
 
 //Создаем попап с профайлом.
@@ -88,34 +88,6 @@ const openPopupProfile = () => {
 };
 editButton.addEventListener("click", openPopupProfile);
 /////////////////////////////////////////////////////////
-//Попап с с добавлением картинок
-/////////////////////////////////////////////////////////
-//Функция принимающая данные из инпутов и вставляющая карточки в DOM
-/* const addCard = ({ nameChange, statusChange }) => {
-  renderLoading(true, config.formTypeAdd);
-  const cardData = { name: nameChange, link: statusChange };
-  Promise.all([api.addCard(cardData), api.getUserName()])
-    .then(([res, userData]) => {
-      cardsSection.addItem(createCard(res, userData._id));
-    })
-    .finally(popupAddCard.close(), renderLoading(false, config.formTypeAdd))
-    .catch((err) => {
-      console.log(`Ошибка:${err}`);
-    });
-}; */
-////////////////
-
-/////////////////
-//Попап с добавлением картинок. Запускает функцию addCard подставляя введённые пользователем данные.
-/* const popupAddCard = new PopupWithForm(config.formTypeAdd, addCard);
-popupAddCard.setEventListeners();
-
-const openPopupAdd = () => {
-  popupAddCard.open();
-  formAddValidator.clearErrors();
-};
-addButton.addEventListener("click", openPopupAdd); */
-/////////////////////////////////////////////////////////
 //Попап с аватаром
 /////////////////////////////////////////////////////////
 //Функция открытия попапа
@@ -129,8 +101,8 @@ const handleSubmitAvatar = (avatarUrl) => {
   api
     .changeAvatar(avatarUrl.statusChange)
     .then((data) => userInfo.setUserInfo(false, false, data.avatar))
-    .catch((err) => console.log(`Ошибка:${err}`))
-    .finally(avatarPopup.close(), renderLoading(false, config.formTypeAvatar));
+    .finally(avatarPopup.close(), renderLoading(false, config.formTypeAvatar))
+    .catch((err) => console.log(`Ошибка:${err}`));
 };
 //Создаем сам класс передаём в него обработчик
 const avatarPopup = new PopupWithForm(
@@ -165,7 +137,7 @@ Promise.all([api.getInitialCards(), api.getUserName()])
           cardsSection.addItem(createCard(item, userData._id));
         },
       },
-      ulCards
+      cardOnPage
     );
     cardsSection.renderItems(res);
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
@@ -177,10 +149,13 @@ Promise.all([api.getInitialCards(), api.getUserName()])
         .then((res) => {
           cardsSection.addItem(createCard(res, userData._id));
         })
-        .finally(popupAddCard.close(), renderLoading(false, config.formTypeAdd))
         .catch((err) => {
           console.log(`Ошибка:${err}`);
-        });
+        })
+        .finally(
+          popupAddCard.close(),
+          renderLoading(false, config.formTypeAdd)
+        );
     };
     const popupAddCard = new PopupWithForm(config.formTypeAdd, addCard);
     popupAddCard.setEventListeners();
@@ -208,19 +183,20 @@ formAvatarValidator.enableValidation();
 
 /////////////////
 //Обработчик лайков
+const cardLikeClicked = "card__like_clicked";
 const handleLikeButton = (likeButton, likeCounter, cardId) => {
-  !likeButton.classList.contains("card__like_clicked")
+  !likeButton.classList.contains(cardLikeClicked)
     ? api
         .like(cardId)
         .then((data) => {
-          likeButton.classList.add("card__like_clicked");
+          likeButton.classList.add(cardLikeClicked);
           likeCounter.textContent = `${data.likes.length}`;
         })
         .catch((err) => console.log(`Ошибка:${err}`))
     : api
         .dislike(cardId)
         .then((data) => {
-          likeButton.classList.remove("card__like_clicked");
+          likeButton.classList.remove(cardLikeClicked);
           likeCounter.textContent = `${data.likes.length}`;
         })
         .catch((err) => console.log(`Ошибка:${err}`));
